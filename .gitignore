@@ -1,0 +1,29 @@
+# --- Python Specifics ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# --- Machine Learning & Data ---
+# Do NOT track your huge dataset of images
+data/
+datasets/
+*.zip
+*.tar.gz
+
+# Do NOT track large trained model files (save these locally instead)
+*.h5
+*.pth
+*.pkl
+*.model
+*.weights
+
+# --- OS & IDEs ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Environment Secrets ---
+.env
