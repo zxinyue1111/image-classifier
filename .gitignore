@@ -27,3 +27,6 @@ datasets/
 
 # --- Environment Secrets ---
 .env
+
+.kaggle/
+kaggle.json
