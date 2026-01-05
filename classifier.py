@@ -15,7 +15,7 @@ VAL_DIR = f'{DATA_DIR}/data-files/validation'
 
 BATCH_SIZE = 32
 NUM_EPOCHS = 10
-LEARNING_RATE = 0.001
+LEARNING_RATE = 0.1
 NUM_WORKERS = 2  # For data loading (0 if on Windows)
 
 # Device configuration
@@ -80,7 +80,7 @@ print(f"Training batches: {len(train_loader)}")
 print("\nLoading pre-trained model...")
 
 # Load ResNet18 pre-trained on ImageNet
-model = models.resnet18(pretrained=True)
+model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
 
 # Freeze early layers (optional - speeds up training)
 # Uncomment these lines if you want to only train the last layer
