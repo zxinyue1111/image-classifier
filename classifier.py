@@ -15,7 +15,7 @@ VAL_DIR = f'{DATA_DIR}/data-files/validation'
 
 BATCH_SIZE = 32
 NUM_EPOCHS = 10
-LEARNING_RATE = 0.1
+LEARNING_RATE = 0.001
 NUM_WORKERS = 2  # For data loading (0 if on Windows)
 
 # Device configuration
@@ -80,21 +80,21 @@ print(f"Training batches: {len(train_loader)}")
 print("\nLoading pre-trained model...")
 
 # Load ResNet18 pre-trained on ImageNet
-model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
+model = models.efficientnet_b3(weights=models.EfficientNet_B3_Weights.DEFAULT)
 
-# Freeze early layers (optional - speeds up training)
-# Uncomment these lines if you want to only train the last layer
-# for param in model.parameters():
-#     param.requires_grad = False
+for param in model.parameters():
+    param.requires_grad = False
 
-# Replace final layer for our number of classes
 num_classes = len(train_dataset.classes)
-model.fc = nn.Linear(model.fc.in_features, num_classes)
+num_ftrs = model.classifier[1].in_features
+model.classifier[1] = nn.Linear(num_ftrs, num_classes)
+
+print(model)
 
 # Move model to device
 model = model.to(device)
 
-print(f"Model loaded: ResNet18")
+print(f"Model loaded: EfficientNet_B3")
 print(f"Final layer modified for {num_classes} classes")
 
 # ============ TRAINING SETUP ============
